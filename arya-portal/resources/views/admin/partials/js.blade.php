@@ -1,0 +1,1 @@
+<script src="{{ asset('js/arya-theme.js') }}?v={{ @filemtime(public_path('js/arya-theme.js')) }}"></script>

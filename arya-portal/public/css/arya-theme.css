@@ -1,0 +1,475 @@
+/* Paksa mode terang: cegah browser (mis. Simple Browser VS Code) menggelapkan halaman secara otomatis. */
+:root { color-scheme: only light; }
+
+/* =========================================================
+   Tema Arya Rangga: putih bersih, aksen cerah, transisi halus.
+   Dimuat setelah CSS AdminLTE sehingga menimpa gaya bawaan.
+   ========================================================= */
+
+:root {
+    --ar-blue: #3b82f6;
+    --ar-cyan: #22d3ee;
+    --ar-pink: #ff5c93;
+    --ar-orange: #ffa63d;
+    --ar-green: #22c88f;
+    --ar-purple: #8b5cf6;
+    --ar-ink: #1f2a44;
+    --ar-muted: #6b7a99;
+    --ar-line: #e8eefb;
+    --ar-bg: #f7faff;
+    --ar-shadow: 0 10px 30px rgba(59, 130, 246, 0.10);
+    --ar-shadow-hover: 0 18px 40px rgba(59, 130, 246, 0.22);
+    --ar-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------- Animasi dasar ---------- */
+@keyframes arFadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes arFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+@keyframes arPop {
+    0%   { opacity: 0; transform: scale(0.92); }
+    60%  { opacity: 1; transform: scale(1.03); }
+    100% { opacity: 1; transform: scale(1); }
+}
+@keyframes arBar {
+    from { width: 0; }
+    to   { width: var(--w, 0%); }
+}
+@keyframes arFloat {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-6px); }
+}
+@keyframes arShine {
+    from { transform: translateX(-120%) skewX(-20deg); }
+    to   { transform: translateX(260%) skewX(-20deg); }
+}
+@keyframes arSlideIn {
+    from { opacity: 0; transform: translateX(-14px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ---------- Kerangka halaman ---------- */
+body {
+    background: #ffffff;
+    color: var(--ar-ink);
+    animation: arFadeIn 0.45s ease both;
+    transition: opacity 0.22s ease, transform 0.22s ease;
+}
+body.page-leaving {
+    opacity: 0;
+    transform: translateY(-8px);
+}
+
+body .content-wrapper {
+    background:
+        radial-gradient(900px 400px at 100% 0%, rgba(34, 211, 238, 0.10), transparent 60%),
+        radial-gradient(700px 400px at 0% 100%, rgba(255, 92, 147, 0.07), transparent 60%),
+        var(--ar-bg);
+}
+
+body .content-header {
+    animation: arFadeUp 0.6s var(--ar-ease) both;
+}
+body .content > .container-fluid > .row,
+body .content > .container-fluid > .card,
+body .content > .container-fluid > .alert {
+    animation: arFadeUp 0.65s var(--ar-ease) both;
+}
+body .content > .container-fluid > .row:nth-child(2) { animation-delay: 0.08s; }
+body .content > .container-fluid > .row:nth-child(3) { animation-delay: 0.16s; }
+
+/* ---------- Navbar ---------- */
+body .main-header.navbar {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--ar-line);
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.06);
+}
+body .main-header .nav-link {
+    color: var(--ar-ink);
+    transition: color 0.25s ease, transform 0.25s ease;
+}
+body .main-header .nav-link:hover {
+    color: var(--ar-blue);
+    transform: translateY(-1px);
+}
+
+/* ---------- Sidebar ---------- */
+body .main-sidebar {
+    background: #ffffff;
+    border-right: 1px solid var(--ar-line);
+    box-shadow: 6px 0 30px rgba(59, 130, 246, 0.05);
+}
+body .brand-link.arya-brand,
+body .brand-link {
+    background: linear-gradient(135deg, #ffffff, #eef5ff);
+    border-bottom: 1px solid var(--ar-line);
+    color: var(--ar-ink);
+    transition: background 0.3s ease;
+}
+body .brand-link .brand-text { font-weight: 600; letter-spacing: 0.2px; }
+body .brand-link .arya-logo {
+    border-radius: 10px;
+    max-height: 34px;
+    animation: arFloat 3.2s ease-in-out infinite;
+}
+body .nav-sidebar .nav-header {
+    color: var(--ar-muted);
+    font-size: 0.7rem;
+    letter-spacing: 1.4px;
+}
+body .nav-sidebar > .nav-item > .nav-link {
+    position: relative;
+    border-radius: 12px;
+    margin: 3px 8px;
+    color: var(--ar-ink);
+    transition: transform 0.3s var(--ar-ease), background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    animation: arSlideIn 0.5s var(--ar-ease) both;
+}
+body .nav-sidebar > .nav-item:nth-child(2) > .nav-link { animation-delay: 0.05s; }
+body .nav-sidebar > .nav-item:nth-child(3) > .nav-link { animation-delay: 0.10s; }
+body .nav-sidebar > .nav-item:nth-child(4) > .nav-link { animation-delay: 0.15s; }
+body .nav-sidebar > .nav-item:nth-child(5) > .nav-link { animation-delay: 0.20s; }
+body .nav-sidebar > .nav-item:nth-child(6) > .nav-link { animation-delay: 0.25s; }
+body .nav-sidebar > .nav-item:nth-child(7) > .nav-link { animation-delay: 0.30s; }
+body .nav-sidebar > .nav-item > .nav-link:hover {
+    background: #eef5ff;
+    color: var(--ar-blue);
+    transform: translateX(6px);
+}
+body .nav-sidebar > .nav-item > .nav-link .nav-icon {
+    transition: transform 0.35s var(--ar-ease), color 0.25s ease;
+}
+body .nav-sidebar > .nav-item > .nav-link:hover .nav-icon {
+    transform: scale(1.25) rotate(-6deg);
+}
+body .nav-sidebar > .nav-item > .nav-link.active,
+body.sidebar-mini .nav-sidebar > .nav-item > .nav-link.active {
+    background: linear-gradient(135deg, var(--ar-blue), var(--ar-cyan));
+    color: #ffffff;
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.35);
+}
+body .nav-sidebar > .nav-item > .nav-link.active .nav-icon { color: #ffffff; }
+
+/* ---------- Header halaman ---------- */
+.arya-hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 22px 26px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #ffffff 0%, #eaf3ff 60%, #e3fbff 100%);
+    border: 1px solid var(--ar-line);
+    box-shadow: var(--ar-shadow);
+    position: relative;
+    overflow: hidden;
+}
+.arya-hero::after {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 70px;
+    background: rgba(255, 255, 255, 0.55);
+    animation: arShine 4.5s ease-in-out infinite;
+}
+.arya-hero h1 { font-size: 1.7rem; font-weight: 700; margin: 0; }
+.arya-eyebrow {
+    margin: 0 0 2px;
+    font-size: 0.78rem;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: var(--ar-blue);
+    font-weight: 600;
+}
+.arya-sub { margin: 4px 0 0; color: var(--ar-muted); font-size: 0.92rem; }
+.arya-role-pill {
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #ffffff;
+    background: linear-gradient(135deg, var(--ar-pink), var(--ar-orange));
+    box-shadow: 0 8px 18px rgba(255, 92, 147, 0.35);
+    position: relative;
+    z-index: 1;
+}
+
+/* ---------- Widget statistik ---------- */
+body .small-box {
+    border-radius: 20px;
+    color: #ffffff;
+    overflow: hidden;
+    box-shadow: var(--ar-shadow);
+    transition: transform 0.35s var(--ar-ease), box-shadow 0.35s ease;
+    animation: arPop 0.7s var(--ar-ease) both;
+}
+body .row > div:nth-child(1) .small-box { animation-delay: 0.05s; }
+body .row > div:nth-child(2) .small-box { animation-delay: 0.15s; }
+body .row > div:nth-child(3) .small-box { animation-delay: 0.25s; }
+body .row > div:nth-child(4) .small-box { animation-delay: 0.35s; }
+body .small-box:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--ar-shadow-hover);
+}
+body .small-box .inner h3 { font-weight: 700; font-size: 2.4rem; }
+body .small-box .icon > i {
+    color: rgba(255, 255, 255, 0.28);
+    transition: transform 0.45s var(--ar-ease), color 0.3s ease;
+}
+body .small-box:hover .icon > i {
+    transform: scale(1.18) rotate(-8deg);
+    color: rgba(255, 255, 255, 0.45);
+}
+body .small-box > .small-box-footer {
+    background: rgba(255, 255, 255, 0.18);
+    color: #ffffff;
+    transition: background 0.25s ease, letter-spacing 0.25s ease;
+}
+body .small-box > .small-box-footer:hover {
+    background: rgba(255, 255, 255, 0.32);
+    letter-spacing: 0.6px;
+}
+.arya-blue   { background: linear-gradient(135deg, #4f8cff, #22d3ee); }
+.arya-pink   { background: linear-gradient(135deg, #ff5c93, #ffa63d); }
+.arya-green  { background: linear-gradient(135deg, #22c88f, #6ee7b7); }
+.arya-purple { background: linear-gradient(135deg, #8b5cf6, #ec7bff); }
+
+/* ---------- Kartu ---------- */
+body .card {
+    border: 1px solid var(--ar-line);
+    border-radius: 20px;
+    background: #ffffff;
+    box-shadow: var(--ar-shadow);
+    transition: transform 0.35s var(--ar-ease), box-shadow 0.35s ease;
+}
+body .card:hover { box-shadow: var(--ar-shadow-hover); }
+body .card-header {
+    background: transparent;
+    border-bottom: 1px solid var(--ar-line);
+    border-radius: 20px 20px 0 0;
+}
+body .card-title { font-weight: 600; }
+
+/* ---------- Grafik batang CSS ---------- */
+.arya-bar-row { margin-bottom: 14px; }
+.arya-bar-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.88rem;
+    margin-bottom: 5px;
+}
+.arya-bar-label strong { color: var(--ar-blue); }
+.arya-bar {
+    height: 10px;
+    border-radius: 999px;
+    background: #eef3fd;
+    overflow: hidden;
+}
+.arya-bar > span {
+    display: block;
+    height: 100%;
+    width: var(--w, 0%);
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--ar-blue), var(--ar-cyan));
+    animation: arBar 1.2s var(--ar-ease) both;
+    animation-delay: calc(var(--i, 0) * 120ms + 300ms);
+}
+.arya-bar-row:nth-child(3n+2) .arya-bar > span { background: linear-gradient(90deg, var(--ar-pink), var(--ar-orange)); }
+.arya-bar-row:nth-child(3n) .arya-bar > span   { background: linear-gradient(90deg, var(--ar-green), #6ee7b7); }
+
+/* ---------- Form dan tombol ---------- */
+body .form-control {
+    border-radius: 12px;
+    border: 1px solid var(--ar-line);
+    background: #fbfdff;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+body .form-control:focus {
+    border-color: var(--ar-blue);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+    transform: translateY(-1px);
+}
+body .btn {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: transform 0.25s var(--ar-ease), box-shadow 0.25s ease, background 0.25s ease;
+}
+body .btn:hover { transform: translateY(-2px); }
+body .btn:active { transform: translateY(0) scale(0.97); }
+body .btn-primary {
+    border: 0;
+    background: linear-gradient(135deg, var(--ar-blue), var(--ar-cyan));
+    box-shadow: 0 8px 18px rgba(59, 130, 246, 0.30);
+}
+body .btn-primary:hover { box-shadow: 0 12px 24px rgba(59, 130, 246, 0.42); }
+body .btn-light { background: #eef3fd; border: 0; color: var(--ar-ink); }
+body .btn-outline-danger:hover { box-shadow: 0 8px 18px rgba(220, 53, 69, 0.28); }
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.55);
+    transform: scale(0);
+    animation: arRipple 0.6s ease-out forwards;
+    pointer-events: none;
+}
+@keyframes arRipple { to { transform: scale(2.6); opacity: 0; } }
+
+/* ---------- Tabel ---------- */
+body .table thead th {
+    border-top: 0;
+    border-bottom: 2px solid var(--ar-line);
+    color: var(--ar-muted);
+    font-size: 0.78rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+body .table td { border-top: 1px solid #f0f4fc; vertical-align: middle; }
+body .table tbody tr {
+    animation: arFadeUp 0.5s var(--ar-ease) both;
+    animation-delay: calc(var(--i, 0) * 45ms);
+    transition: background 0.25s ease, transform 0.25s ease, opacity 0.35s ease;
+}
+body .table tbody tr:hover {
+    background: #f1f7ff;
+    transform: translateX(4px);
+}
+body .table tbody tr.row-removing {
+    opacity: 0;
+    transform: translateX(60px) scale(0.98);
+    background: #ffe9ef;
+}
+
+/* ---------- Badge dan alert ---------- */
+.arya-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.76rem;
+    font-weight: 600;
+    animation: arPop 0.5s var(--ar-ease) both;
+}
+.arya-badge.hijau  { background: #dcfce7; color: #15803d; }
+.arya-badge.kuning { background: #fff2d6; color: #b45309; }
+.arya-badge.merah  { background: #ffe1e8; color: #be123c; }
+.arya-badge.biru   { background: #dbeafe; color: #1d4ed8; }
+.arya-badge.ungu   { background: #ede9fe; color: #6d28d9; }
+
+body .arya-alert {
+    border: 0;
+    border-radius: 14px;
+    box-shadow: var(--ar-shadow);
+    animation: arPop 0.5s var(--ar-ease) both;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+body .arya-alert.hilang { opacity: 0; transform: translateY(-10px); }
+
+/* ---------- Pagination ---------- */
+body .page-link {
+    border: 0;
+    margin: 0 3px;
+    border-radius: 10px;
+    color: var(--ar-ink);
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+body .page-link:hover { background: #eef5ff; transform: translateY(-2px); }
+body .page-item.active .page-link {
+    background: linear-gradient(135deg, var(--ar-blue), var(--ar-cyan));
+    color: #ffffff;
+    box-shadow: 0 6px 14px rgba(59, 130, 246, 0.35);
+}
+
+/* ---------- Footer ---------- */
+body .main-footer {
+    background: #ffffff;
+    border-top: 1px solid var(--ar-line);
+    color: var(--ar-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body *, body *::before, body *::after {
+        animation-duration: 0.01ms !important;
+        animation-delay: 0ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* =========================================================
+   Pengunci tema terang. Menang atas kelas gelap AdminLTE
+   (dark-mode, navbar-dark, sidebar-dark-*) apa pun sumbernya.
+   ========================================================= */
+html, body { background: #ffffff !important; color: var(--ar-ink) !important; }
+body .main-header.navbar,
+body .main-header.navbar.navbar-dark {
+    background: rgba(255, 255, 255, 0.92) !important;
+    border-color: var(--ar-line) !important;
+}
+body .main-header .nav-link,
+body .main-header .navbar-nav .nav-link { color: var(--ar-ink) !important; }
+body .main-header .nav-link:hover { color: var(--ar-blue) !important; }
+
+body .main-sidebar,
+body .main-sidebar.sidebar-dark-primary { background: #ffffff !important; }
+body .brand-link,
+body .brand-link .brand-text { color: var(--ar-ink) !important; }
+body .nav-sidebar > .nav-item > .nav-link,
+body .nav-sidebar > .nav-item > .nav-link p { color: var(--ar-ink) !important; }
+body .nav-sidebar > .nav-item > .nav-link .nav-icon { color: var(--ar-blue) !important; }
+body .nav-sidebar > .nav-item > .nav-link.active,
+body .nav-sidebar > .nav-item > .nav-link.active p,
+body .nav-sidebar > .nav-item > .nav-link.active .nav-icon { color: #ffffff !important; }
+body .nav-sidebar > .nav-item > .nav-link.active {
+    background: linear-gradient(135deg, var(--ar-blue), var(--ar-cyan)) !important;
+}
+body .nav-sidebar .nav-header { color: var(--ar-muted) !important; }
+
+body .content-wrapper,
+body .content-wrapper .content { color: var(--ar-ink) !important; }
+body .card,
+body .card-body,
+body .table,
+body .table thead th,
+body .table td {
+    background-color: #ffffff !important;
+    color: var(--ar-ink) !important;
+}
+body .table thead th { color: var(--ar-muted) !important; }
+body .table tbody tr:hover td { background-color: #f1f7ff !important; }
+body .form-control,
+body .custom-select {
+    background-color: #ffffff !important;
+    color: var(--ar-ink) !important;
+    border-color: #dbe6fa !important;
+}
+body .form-control::placeholder { color: #8a97b3 !important; }
+body .page-link { background-color: #ffffff !important; color: var(--ar-blue) !important; border-color: var(--ar-line) !important; }
+body .page-item.active .page-link { background: var(--ar-blue) !important; color: #ffffff !important; }
+body .page-item.disabled .page-link { color: #b6c2da !important; }
+body .main-footer { background: #ffffff !important; color: var(--ar-muted) !important; border-top: 1px solid var(--ar-line) !important; }
+
+/* Panel samping, atas, bawah: pastikan teks selalu kontras terhadap latar. */
+.main-sidebar, .main-sidebar .sidebar { background: #ffffff !important; }
+.main-sidebar .nav-sidebar .nav-link,
+.main-sidebar .nav-sidebar .nav-link p,
+.main-sidebar .brand-link, .main-sidebar .brand-link .brand-text { color: #1f2a44 !important; opacity: 1 !important; }
+.main-sidebar .nav-sidebar .nav-link .nav-icon { color: #3b82f6 !important; opacity: 1 !important; }
+.main-sidebar .nav-sidebar .nav-link.active,
+.main-sidebar .nav-sidebar .nav-link.active p,
+.main-sidebar .nav-sidebar .nav-link.active .nav-icon { color: #ffffff !important; }
+.main-sidebar .nav-sidebar .nav-link.active { background: linear-gradient(135deg, #3b82f6, #22d3ee) !important; }
+.main-sidebar .nav-header { color: #6b7a99 !important; }
+
+.main-header.navbar { background: #ffffff !important; border-bottom: 1px solid #e8eefb !important; }
+.main-header.navbar .nav-link, .main-header.navbar .nav-link i, .main-header.navbar .nav-link span { color: #1f2a44 !important; opacity: 1 !important; }
+
+.main-footer { background: #ffffff !important; color: #6b7a99 !important; border-top: 1px solid #e8eefb !important; }
+.main-footer strong, .main-footer b, .main-footer a { color: #1f2a44 !important; }
